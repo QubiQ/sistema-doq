@@ -1,5 +1,3 @@
-# sistema-doq
-Repositorio para el aprendizaje de Desarollador Odoo QubiQ
 Historia de usuario
 Yo como usuario quiero [poder registrar libros] para [poder tener una librería en Odoo]
 
