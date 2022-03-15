@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+
+    <!-- books.book form view -->
+    <record id="books_book_view_form" model="ir.ui.view">
+        <field name="name">books.book.view.form</field>
+        <field name="model">books.book</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <field name="name" />
+                        <field name="price" />
+                        <field name="edition" />
+                    </group>
+                    <group>
+                        <field name="book_type" />
+                        <field name="website" />
+                        <field name="available" />
+                        <field name="date" />
+
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- books.book tree view -->
+    <record id="books_book_view_tree" model="ir.ui.view">
+        <field name="name">books.book.view.tree</field>
+        <field name="model">books.book</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="price" />
+                <field name="edition" />
+                <field name="book_type" />
+                <field name="website" />
+                <field name="available" />
+                <field name="date" />
+
+            </tree>
+        </field>
+    </record>
+    <!-- books.book action window -->
+    <record id="books_book_action" model="ir.actions.act_window">
+        <field name="name">Books</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">books.book</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Comienza a registrar libros
+            </p>
+            <p>
+                <!-- More details about what a user can do with this object will be OK -->
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="books_book_menu_act" name="Library" action="books_book_action" sequence="10" />
+
+</odoo>
