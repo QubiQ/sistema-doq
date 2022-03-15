@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="books_book_view_form" model="ir.ui.view">
+        <field name="name">books.book.view.form</field>
+        <field name="model">books.book</field>
+        <field name="inherit_id" ref="library.books_book_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='edition']" position="after">
+                <field name="page_number"/>
+            </xpath>
+            <xpath expr="//field[@name='date']" position="attributes">
+                <attribute name="attrs">{'required': [('available', '=', True)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='website']" position="attributes">
+                <attribute name="attrs">{'required': [('available', '=', True)]}</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- books.book search view -->
+    <record id="books_book_view_search" model="ir.ui.view">
+        <field name="name">books.book.view.search</field>
+        <field name="model">books.book</field>
+        <field name="arch" type="xml">
+            <search string="Search Description">
+                <field name="name"/>
+                <field name="website"/>
+                <filter name="filter_date" date="date"/>
+                <group expand="0" string="Group By">
+                    <filter string="Type" name="type" context="{'group_by': 'book_type'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+</odoo>
