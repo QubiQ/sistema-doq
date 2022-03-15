@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <template id="custom_layout" inherit_id="web.external_layout_clean">
+        <!-- 3º Historia de usuario-->
+        <xpath expr="//ul[@class='list-inline pagenumber float-right text-center']/parent::div" position="attributes">
+            <attribute name="t-if">False</attribute>
+        </xpath>
+    </template>
+</odoo>

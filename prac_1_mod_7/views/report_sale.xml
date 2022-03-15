@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+
+    <template id="custom_report_sale_document" inherit_id="sale.report_saleorder_document">
+        <!-- 1º Caso de usuario-->
+        <xpath expr="//span[@t-field='line.product_uom_qty']" position="attributes">
+            <attribute name="t-if">line.product_id and line.product_id.type != 'service'</attribute>
+        </xpath>
+        <xpath expr="//span[@t-field='line.product_uom']" position="attributes">
+            <attribute name="t-if">line.product_id and line.product_id.type != 'service'</attribute>
+        </xpath>
+        <!-- 2º Caso de usuario-->
+        <xpath expr="//div[@t-if='doc.user_id.name']" position="before">
+            <div t-if="doc.origin" class="col-auto col-3 mw-100 mb-2">
+                <strong>Origin:</strong>
+                <p class="m-0" t-field="doc.origin"/>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="custom_report_sale">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="prac_1_mod_7.custom_report_sale_document" t-lang="doc.partner_id.lang"/>
+            </t>
+        </t>
+    </template>
+</odoo>
