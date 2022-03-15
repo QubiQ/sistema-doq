@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!-- Copyright 2021 Jesus Ramoneda <jesus.ramoneda@qubiq.es>
+    License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <!-- 4º Historia de usuario -->
+    <record id="product_pack_line_view_tree" model="ir.ui.view">
+        <field name="name">product.pack.line.view.tree</field>
+        <field name="model">product.pack.line</field>
+        <field name="arch" type="xml">
+            <tree create="false" edit="false">
+                <field name="pack_id"/>
+                <field name="component_id"/>
+                <field name="quantity"/>
+                <field name="price"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- product.pack.line search view -->
+    <record id="product_pack_line_view_search" model="ir.ui.view">
+        <field name="name">product.pack.line.view.search</field>
+        <field name="model">product.pack.line</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="component_id"/>
+                <group expand="1" string="Group By">
+                    <filter string="Product Pack" name="pack" context="{'group_by':'pack_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+
+    <record id="product_pack_line_act_window" model="ir.actions.act_window">
+        <field name="type">ir.actions.act_window</field>
+        <field name="name">Packs Components</field>
+        <field name="res_model">product.pack.line</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+    <menuitem id="product_pack_line_menu_act" name="Pack Components"
+        parent="sale.product_menu_catalog" action="product_pack_line_act_window" sequence="3"/>
+</odoo>

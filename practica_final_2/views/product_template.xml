@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!-- Copyright 2021 Jesus Ramoneda <jesus.ramoneda@qubiq.es>
+    License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <!-- 1º Historia de usuario -->
+    <record id="product_template_form_view" model="ir.ui.view">
+        <field name="name">product.template.inherit.view.form</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='options']" position="inside">
+                <div>
+                    <field name="is_pack"/>
+                    <label for="is_pack"/>
+                </div>
+            </xpath>
+            <!-- 2º Historia de Usuario -->
+            <!-- Hacemos solo lectura el campo de precio de venta cuando el metodo es suma de componentes-->
+            <xpath expr="//field[@name='list_price']" position="attributes">
+                <attribute name="attrs">{'readonly': [('is_pack', '=', True), ('price_pack_method', '=', 'component_total')]}</attribute>
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page string="Pack Options" name="pack"
+                    attrs="{'invisible': [('is_pack', '=', False)]}">
+                    <!-- 2º Historia de Usuario -->
+                    <!-- Utilizo el widget monetary para agregar el simbolo de la moneda-->
+                    <group string="Options" col="4">
+                        <field name="price_pack_method"/>
+                        <field name="list_price" widget="monetary" attrs="{'readonly': [('is_pack', '=', True), ('price_pack_method', '=', 'component_total')]}"
+                        options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                    </group>
+                    <!-- FIN 2º Historia Usuario-->
+                    <separator string="Component Lines" />
+                    <field name="component_line_ids">
+                        <tree editable="bottom">
+                            <field name="component_id"/>
+                            <field name="quantity"/>
+                            <field name="price"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- 4º Historia de Usuario -->
+    <record id="product_template_search_view" model="ir.ui.view">
+        <field name="name">product.template.inherit.view.search</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_search_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='consumable']" position="after">
+                <filter string="Packs" name="packs" domain="[('is_pack', '=', True)]"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

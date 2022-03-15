@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+    <!-- 5º Historia de Usuario-->
+        <record id="custom_product_template_pack" model="ir.actions.report">
+            <field name="name">Pack Components</field>
+            <field name="model">product.template</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">practica_final_2.custom_product_template_pack</field>
+            <field name="report_file">practica_final_2.custom_product_template_pack</field>
+            <field name="print_report_name">(object.name)</field>
+            <field name="binding_model_id" ref="account.model_product_template"/>
+            <field name="binding_type">report</field>
+        </record>
+
+    </data>
+</odoo>
