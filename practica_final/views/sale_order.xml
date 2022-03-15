@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<odoo>
+<!-- 3º Historia de Usuario-->
+    <record id="view_order_form" model="ir.ui.view">
+        <field name="name">sale.order.inherit.view.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='sale_total']" position="after">
+                <group colspan="2" string="Commission">
+                    <field name="commission_line_ids" nolabel="1">
+                        <tree editable="bottom">
+                            <field name="name" options="{'no_create': True}"/>
+                            <field name="commission"/>
+                            <!-- 4º Historia de Usuario-->
+                            <field name="amount"/>
+                        </tree>
+                    </field>
+                </group>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>
