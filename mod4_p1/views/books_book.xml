@@ -50,6 +50,23 @@
             </tree>
         </field>
     </record>
+
+    <!-- books.book search view -->
+    <record id="books_book_view_search" model="ir.ui.view">
+        <field name="name">books.book.view.search</field>
+        <field name="model">books.book</field>
+        <field name="arch" type="xml">
+            <search string="Search Description">
+                <field name="name"/>
+                <field name="website"/>
+                <filter name="filter_date" date="date"/>
+                <group expand="0" string="Group By">
+                    <filter string="Type" name="type" context="{'group_by': 'book_type'}"/>
+                    <filter string="Author" name="author_id" context="{'group_by': 'author_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
     <!-- books.book action window -->
     <record id="books_book_action" model="ir.actions.act_window">
         <field name="name">Books</field>
