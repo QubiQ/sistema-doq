@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+
+    <!-- books.book form view -->
+    <record id="books_book_view_form" model="ir.ui.view">
+        <field name="name">books.book.view.form</field>
+        <field name="model">books.book</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                <!-- Creo un grupo y dentro de este dos con el fin
+                de separar los campos en la mitad de la vista formulario -->
+                    <group>
+                        <group>
+                            <field name="name" />
+                            <field name="price" />
+                            <field name="edition" />
+                            <field name="author_id" />
+                            <!-- Utilizo widget many2many_tags para ver los géneros como etiquetas -->
+                            <field name="genre_ids" widget="many2many_tags"/>
+                        </group>
+                        <group>
+                            <field name="book_type" />
+                            <field name="website" />
+                            <field name="available" />
+                            <field name="date" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- books.book tree view -->
+    <record id="books_book_view_tree" model="ir.ui.view">
+        <field name="name">books.book.view.tree</field>
+        <field name="model">books.book</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="price" />
+                <field name="edition" />
+                <field name="author_id" />
+                <field name="genre_ids" widget="many2many_tags"/>
+                <field name="book_type" />
+                <field name="website" />
+                <field name="available" />
+                <field name="date" />
+
+            </tree>
+        </field>
+    </record>
+    <!-- books.book action window -->
+    <record id="books_book_action" model="ir.actions.act_window">
+        <field name="name">Books</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">books.book</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Begin to register books
+            </p>
+            <p>
+                <!-- More details about what a user can do with this object will be OK -->
+            </p>
+        </field>
+    </record>
+    <menuitem id="books_book_menu_act" name="Books" parent="books_parent_menu" action="books_book_action" sequence="5" />
+</odoo>

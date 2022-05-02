@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+
+    <template id="custom_report_sale_document" inherit_id="sale.report_saleorder_document">
+        <!-- 5º Caso de usuario-->
+        <xpath expr="//p[@t-field='doc.user_id']" position="replace">
+            <!-- Esta es la manera facil -->
+            <!-- <t t-foreach="doc.commission_line_ids" t-as="commission">
+               <span t-field="commission.name"> </span>
+            </t> -->
+            <!-- Esta es la manera optima
+            Con el t-esc podemos escribir python
+            el ','.join(<lista>) concatena los valores de una lista separados por ,
+            el primer .mapped(<campo>) Devuelve una lista con la agrupacion
+            de los campos Commercial y el segundo mapped el nombre de cada
+            comercial de las lineas commision -->
+            <p t-esc="', '.join(doc.commission_line_ids.mapped('name').mapped('name'))"/>
+        </xpath>
+    </template>
+</odoo>

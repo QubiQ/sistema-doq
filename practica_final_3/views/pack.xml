@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="product_template_form_view" model="ir.ui.view">
+        <field name="name">product.template.inherit.view.form</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//span[@class='d-inline-block']" position="inside">
+                <div>
+                    <field name="is_pack"/>
+                    <label for="is_pack"/>
+                </div>
+            </xpath>
+            <xpath expr="//page[@name='general_information']" position="after">
+                <page name="components" string="Components" attrs="{'invisible' : [('is_pack', '!=', True)]}">
+                    <group colspan="2" string="Linias de pack">
+                    <field name="pack_line_ids" nolabel="1">
+                        <tree editable="bottom">
+                            <field name="product_id" options="{'no_create': True}"/>
+                            <field name="quantity"/>
+                            <field name="price" readonly="1"/>
+                        </tree>
+                    </field>
+                </group>
+                <group colspan="2" string="Pack's price">
+                    <field name="type_price"/>
+                    <field name="list_price" attrs="{'readonly' : [('type_price', '=', 'suma_componentes')]}"/>
+                </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- line.packs tree view -->
+    <record id="line_packs_view_tree" model="ir.ui.view">
+        <field name="name">line.packs.view.tree</field>
+        <field name="model">line.packs</field>
+        <field name="arch" type="xml">
+            <tree>
+                <!-- Add your fields here -->
+                <field name="pack_id"/>
+                <field name="product_id"/>
+                <field name="quantity"/>
+                <field name="price"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- line.packs search view -->
+    <record id="line_packs_view_search" model="ir.ui.view">
+        <field name="name">line.packs.view.search</field>
+        <field name="model">line.packs</field>
+        <field name="arch" type="xml">
+            <search string="Search Description">
+                <!-- Add your fields here -->
+                <group expand="1" string="Group By">
+                    <filter string="Product Pack" name="pack" context="{'group_by': 'pack_id', }"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- line.packs action window -->
+    <record id="line_packs_action" model="ir.actions.act_window">
+        <field name="name">line.packs.action</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">line.packs</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="line_packs_menu_act" name="Pack Products" parent="sale.product_menu_catalog" action="line_packs_action" sequence="3"/>
+
+   <record id="custom_product_template_pack" model="ir.actions.report">
+            <field name="name">Pack Components</field>
+            <field name="model">product.template</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">practica_final_2.custom_product_template_pack</field>
+            <field name="report_file">practica_final_2.custom_product_template_pack</field>
+            <field name="print_report_name">(object.name)</field>
+            <field name="binding_model_id" ref="account.model_product_template"/>
+            <field name="binding_type">report</field>
+        </record>
+
+
+
+    <template id="custom_product_template_pack">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <h1 t-field="doc.name" style="margin-bottom:30px;"/>
+                <table style="width:100%">
+                    <thead>
+                        <th style="text:align:left;width:50%">Component</th>
+                        <th style="text-align:right;">Quantity</th>
+                        <th style="text-align:right;">Price</th>
+                    </thead>
+                    <t t-foreach="doc.pack_line_ids" t-as="line">
+                        <tr>
+                            <td style="text:align:left;width:50%">
+                                <span t-field="line.product_id"/>
+                            </td>
+                            <td style="text-align:right;">
+                                <span t-field="line.quantity"/>
+                            </td>
+                            <td style="text-align:right;">
+                                <span t-field="line.price"/>
+                            </td>
+                        </tr>
+                    </t>
+                </table>
+            </t>
+        </t>
+    </template>
+
+    <!-- Historias de usuario 1 & 2-->
+
+    <!-- sale.order inherit form view -->
+    <record id="sale_order_inherit_view_id" model="ir.ui.view">
+        <field name="name">sale.order.inherit.view.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <!-- Add your xpath here -->
+            <xpath expr="//field[@name='payment_term_id']" position="after">
+                <!-- Historia de usuario 1-->
+                <field name="has_pack"/>
+                <!-- Historia de usuario 2-->
+                <field name="pack_id" widget="many2one_tags" required="1" attrs="{'invisible': [('has_pack', '=', False)]}"/>
+            </xpath>
+        </field>
+    </record>
+
+
+    
+</odoo>
