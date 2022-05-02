@@ -17,12 +17,4 @@
             </div>
         </xpath>
     </template>
-
-    <template id="custom_report_sale">
-        <t t-call="web.html_container">
-            <t t-foreach="docs" t-as="doc">
-                <t t-call="prac_1_mod_7.custom_report_sale_document" t-lang="doc.partner_id.lang"/>
-            </t>
-        </t>
-    </template>
 </odoo>
