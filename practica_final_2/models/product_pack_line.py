@@ -11,7 +11,7 @@ class ProductPackLine(models.Model):
         string="Pack",
     )
     component_id = fields.Many2one(
-        comodel_name='product.template',
+        comodel_name='product.product',
         string="Component",
         required=True,
     )
