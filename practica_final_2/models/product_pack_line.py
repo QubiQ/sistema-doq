@@ -7,7 +7,7 @@ class ProductPackLine(models.Model):
     _name = 'product.pack.line'
     # 1º Historia de usuario
     pack_id = fields.Many2one(
-        comodel_name='product.template',
+        comodel_name='product.product',
         string="Pack",
     )
     component_id = fields.Many2one(
