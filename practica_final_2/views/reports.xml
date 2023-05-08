@@ -9,7 +9,7 @@
             <field name="report_name">practica_final_2.custom_product_template_pack</field>
             <field name="report_file">practica_final_2.custom_product_template_pack</field>
             <field name="print_report_name">(object.name)</field>
-            <field name="binding_model_id" ref="account.model_product_template"/>
+            <field name="binding_model_id" ref="product.model_product_template"/>
             <field name="binding_type">report</field>
         </record>
 
