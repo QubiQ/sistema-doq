@@ -2,7 +2,7 @@
 <odoo>
     <data>
     <!-- 5º Historia de Usuario-->
-        <record id="custom_product_template_pack" model="ir.actions.report">
+        <record id="custom_product_template_pack_report" model="ir.actions.report">
             <field name="name">Pack Components</field>
             <field name="model">product.template</field>
             <field name="report_type">qweb-pdf</field>
